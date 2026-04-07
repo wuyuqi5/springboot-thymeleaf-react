@@ -8,14 +8,28 @@
         'dashboard.svg',
         '/',
         'Dashboard',
-        ${currentPath}
+        ${currentPath == '/'}
       )}">
   </li>
   <li th:replace="~{fragments/menu-item :: menuItem(
         'todo.svg',
-        '/todo',
-        'Todo',
-        ${currentPath}
+        '/htmx-todo',
+        'Htmx Todo',
+        ${currentPath == '/htmx-todo'}
+      )}">
+  </li>
+  <li th:replace="~{fragments/menu-item :: menuItem(
+        'todo.svg',
+        '/react-todo',
+        'React Todo',
+        ${currentPath == '/react-todo'}
+      )}">
+  </li>
+  <li th:replace="~{fragments/menu-item :: menuItem(
+        'todo.svg',
+        '/jquery-todo',
+        'jQuery Todo',
+        ${currentPath == '/jquery-todo'}
       )}">
   </li>
 </ul>

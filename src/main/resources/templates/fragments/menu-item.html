@@ -2,16 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<li th:fragment="menuItem(icon, path, title, currentPath)"
+<li th:fragment="menuItem(icon, path, title, active)"
     class="mx-2">
 
   <a th:href="@{${path}}"
      class="block rounded-[22px] p-1.5 text-[#6B7280] transition-colors"
-     th:with="active=${
-      path == '/'
-        ? currentPath == '/'
-        : #strings.startsWith(currentPath, path)
-   }"
      th:classappend="
       ${active}
         ? ' !text-[#ff2442] font-semibold bg-[#fff1f3] shadow-[0_10px_24px_rgba(255,36,66,0.10)]'

@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/todo")
+@RequestMapping("/htmx-todo")
 @RequiredArgsConstructor
-public class TodoController {
+public class HtmxTodoController {
 
   private final TodoService todoService;
 
   @GetMapping
   public String page(Model model) {
     populate(model);
-    return "todo/index";
+    return "htmx-todo/index";
   }
 
   @PostMapping("/items")
@@ -32,21 +32,21 @@ public class TodoController {
   ) {
     todoService.add(title, description, priority);
     populate(model);
-    return "todo/fragments :: board";
+    return "htmx-todo/fragments :: board";
   }
 
   @PostMapping("/items/{id}/toggle")
   public String toggle(@PathVariable long id, Model model) {
     todoService.toggle(id);
     populate(model);
-    return "todo/fragments :: board";
+    return "htmx-todo/fragments :: board";
   }
 
   @PostMapping("/items/{id}/delete")
   public String delete(@PathVariable long id, Model model) {
     todoService.delete(id);
     populate(model);
-    return "todo/fragments :: board";
+    return "htmx-todo/fragments :: board";
   }
 
   private void populate(Model model) {

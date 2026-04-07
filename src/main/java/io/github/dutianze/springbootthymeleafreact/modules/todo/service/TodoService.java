@@ -31,7 +31,7 @@ public class TodoService {
   }
 
   @Transactional
-  public void add(String title, String description, String priority) {
+  public TodoItemDto add(String title, String description, String priority) {
     Preconditions.requireText("title", title);
 
     Todo todo = new Todo(
@@ -39,14 +39,15 @@ public class TodoService {
         normalizeDescription(description),
         normalizePriority(priority)
     );
-    todoRepository.save(todo);
+    return TodoItemDto.from(todoRepository.save(todo));
   }
 
   @Transactional
-  public void toggle(long id) {
+  public TodoItemDto toggle(long id) {
     Todo todo = todoRepository.findById(id)
         .orElseThrow(() -> new BizException(ErrorCode.TODO_NOT_FOUND));
     todo.toggleDone();
+    return TodoItemDto.from(todo);
   }
 
   @Transactional

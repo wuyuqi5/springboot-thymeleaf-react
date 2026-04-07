@@ -15,9 +15,9 @@
 
       <form
           class="rounded-[24px] border border-black/6 bg-white p-4 shadow-[0_12px_28px_rgba(57,65,58,0.05)]"
-          hx-post="/todo/items"
+          hx-post="/htmx-todo/items"
           hx-target="#todo-board"
-          hx-swap="outerHTML settle:220ms"
+          hx-swap="outerHTML"
           hx-on::after-request="if(event.detail.successful){ this.reset() }"
       >
         <input
@@ -43,7 +43,7 @@
         </div>
       </form>
 
-      <th:block th:replace="~{todo/fragments :: board}"></th:block>
+      <th:block th:replace="~{htmx-todo/fragments :: board}"></th:block>
     </div>
   </div>
 </main>

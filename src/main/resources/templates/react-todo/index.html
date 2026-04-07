@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(title=~{::title}, content=~{::main}, head=~{::head-content})}">
+<head>
+  <title>React Todo | App Template</title>
+</head>
+<body>
+<th:block th:fragment="head-content">
+  <vite:vite>
+    <vite:entry value="/react/mounts/todo.tsx"></vite:entry>
+  </vite:vite>
+</th:block>
+<main>
+  <div id="todo-react-app"></div>
+</main>
+</body>
+</html>

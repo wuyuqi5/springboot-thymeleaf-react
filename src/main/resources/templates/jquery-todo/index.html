@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(title=~{::title}, content=~{::main}, head=~{::head-content})}">
+<head>
+  <title>jQuery Todo | App Template</title>
+</head>
+<body>
+<th:block th:fragment="head-content">
+  <vite:vite>
+    <vite:entry value="/css/todo.css"></vite:entry>
+    <vite:entry value="/js/todo.js"></vite:entry>
+  </vite:vite>
+</th:block>
+<main>
+  <div class="app-content-panel p-4 sm:p-6">
+    <div class="todo-page">
+      <div class="mb-6">
+        <div>
+          <h1 class="todo-title">My tasks</h1>
+          <p class="todo-subtitle">
+            The same todo flow rendered with jQuery and loaded from the API.
+          </p>
+        </div>
+      </div>
+
+      <div class="todo-form-card">
+        <input
+          id="jquery-todo-title"
+          type="text"
+          placeholder="Add a task"
+          class="todo-title-input">
+        <div class="todo-form-grid">
+          <input
+            id="jquery-todo-description"
+            type="text"
+            placeholder="Details"
+            class="todo-input">
+          <select
+            id="jquery-todo-priority"
+            class="todo-input">
+            <option value="High">High</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="Low">Low</option>
+          </select>
+          <button id="jquery-todo-add" type="button" class="todo-add-button">
+            Add
+          </button>
+        </div>
+      </div>
+
+      <div id="jquery-todo-error" class="todo-error todo-hidden"></div>
+
+      <section id="jquery-todo-board" class="todo-board">
+        <div class="todo-stats">
+          <span id="jquery-open-count" class="todo-stat" th:text="${openCount} + ' open'">0 open</span>
+          <span id="jquery-done-count" class="todo-stat" th:text="${doneCount} + ' done'">0 done</span>
+          <span id="jquery-high-count" class="todo-stat" th:text="${highPriorityCount} + ' high priority'">0 high priority</span>
+        </div>
+
+        <div class="todo-list-shell">
+          <div id="jquery-todo-list">
+            <div th:if="${#lists.isEmpty(todos)}" class="todo-empty">
+              No tasks yet.
+            </div>
+
+            <article th:each="todo : ${todos}" class="todo-item" th:attr="data-id=${todo.id}">
+              <button
+                  type="button"
+                  data-action="toggle"
+                  class="todo-toggle"
+                  th:classappend="${todo.done} ? ' is-done' : ''">
+                <svg viewBox="0 0 20 20" class="todo-check">
+                  <path d="M7.6 13.2 4.7 10.3l-1.1 1.1 4 4 8-8-1.1-1.1z"></path>
+                </svg>
+              </button>
+              <div class="todo-item-main">
+                <div class="todo-item-head">
+                  <h3 class="todo-item-title"
+                      th:classappend="${todo.done} ? ' is-done' : ''"
+                      th:text="${todo.title}">
+                    Task title
+                  </h3>
+                  <span
+                      class="todo-priority"
+                      th:text="${todo.priority}"
+                      th:classappend="${todo.priority == 'High'} ? ' todo-priority-high' : (${todo.priority == 'Low'} ? ' todo-priority-low' : ' todo-priority-medium')">
+                    Medium
+                  </span>
+                </div>
+                <p
+                    th:if="${todo.description != null and !#strings.isEmpty(todo.description)}"
+                    class="todo-item-description"
+                    th:classappend="${todo.done} ? ' is-done' : ''"
+                    th:text="${todo.description}">
+                  Details
+                </p>
+              </div>
+              <button type="button" data-action="delete" class="todo-delete">
+                Delete
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+</body>
+</html>

@@ -287,7 +287,7 @@
   }
 
   .app-dialog-inner {
-    @apply rounded-[24px] bg-white px-8 py-10;
+    @apply px-8 py-10;
   }
 
   .surface-panel {
@@ -342,19 +342,6 @@
 
   .app-todo-toggle:active .app-todo-check {
     transform: scale(1.15);
-  }
-
-  #todo-board {
-    transition: opacity 0.18s ease, transform 0.18s ease;
-  }
-
-  #todo-board.htmx-swapping {
-    opacity: 0.42;
-    transform: translateY(6px);
-  }
-
-  .app-todo-row.htmx-added {
-    animation: todo-row-in 0.26s ease-out both;
   }
 
   .app-panel {

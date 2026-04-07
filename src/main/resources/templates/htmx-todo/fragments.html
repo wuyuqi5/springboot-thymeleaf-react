@@ -19,9 +19,9 @@
     >
       <button
           type="button"
-          th:hx-post="@{'/todo/items/' + ${todo.id} + '/toggle'}"
+          th:hx-post="@{'/htmx-todo/items/' + ${todo.id} + '/toggle'}"
           hx-target="#todo-board"
-          hx-swap="outerHTML settle:220ms"
+          hx-swap="outerHTML"
           class="app-todo-toggle mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition"
           th:classappend="${todo.done} ? ' is-done border-[#ff2442] bg-[#ff2442] text-white' : ' border-[#b7c2cb] bg-white text-transparent hover:border-[#ff2442]'">
         <svg viewBox="0 0 20 20" class="app-todo-check h-3.5 w-3.5 fill-current">
@@ -55,9 +55,9 @@
 
       <button
           type="button"
-          th:hx-post="@{'/todo/items/' + ${todo.id} + '/delete'}"
+          th:hx-post="@{'/htmx-todo/items/' + ${todo.id} + '/delete'}"
           hx-target="#todo-board"
-          hx-swap="outerHTML settle:220ms"
+          hx-swap="outerHTML"
           class="shrink-0 text-sm text-[#8b98a4] transition hover:text-[#ff2442]">
         Delete
       </button>

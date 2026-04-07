@@ -15,7 +15,10 @@ export default defineConfig({
         manifest: true,
         rollupOptions: {
             input: [
-                '/static/css/application.css'
+                '/static/css/application.css',
+                '/static/css/todo.css',
+                '/static/js/todo.js',
+                '/static/react/mounts/todo.tsx'
             ]
         },
         outDir: path.join(__dirname, `./target/classes/static`),
