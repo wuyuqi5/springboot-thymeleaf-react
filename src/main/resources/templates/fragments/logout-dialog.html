@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="app-dialog-box">
+  <div class="app-dialog-inner">
+    <div class="flex items-start gap-4">
+      <div class="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,var(--color-accent),#5b1414)] text-white shadow-[0_14px_26px_rgba(0,0,0,0.22)]">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="22"
+             height="22"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+      </div>
+      <div class="min-w-0 flex-1">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--color-ink-soft)]">
+          Session
+        </p>
+        <h3 class="mt-2 text-2xl font-semibold tracking-[-0.04em] text-[var(--color-ink-strong)]">
+          Sign out?
+        </h3>
+        <p class="mt-3 text-sm leading-7 text-[var(--color-ink-soft)]">
+          This will end the current session and return you to the login page. If you have unsaved work, review it first.
+        </p>
+      </div>
+    </div>
+    <div class="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+      <button type="button"
+              class="app-outline-btn"
+              @click="window.dispatchEvent(new CustomEvent('close-modal'))">
+        Stay signed in
+      </button>
+      <form th:action="@{/logout}" method="post">
+        <button type="submit" class="app-primary-btn min-w-36">
+          Logout
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

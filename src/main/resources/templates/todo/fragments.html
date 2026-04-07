@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<section id="todo-board" th:fragment="board" class="mt-5">
+  <div class="mb-4 flex flex-wrap items-center gap-2 text-sm text-[#6f8397]">
+    <span class="rounded-full bg-white px-3 py-1 shadow-[0_6px_18px_rgba(57,65,58,0.04)]" th:text="${openCount} + ' open'">0 open</span>
+    <span class="rounded-full bg-white px-3 py-1 shadow-[0_6px_18px_rgba(57,65,58,0.04)]" th:text="${doneCount} + ' done'">0 done</span>
+    <span class="rounded-full bg-white px-3 py-1 shadow-[0_6px_18px_rgba(57,65,58,0.04)]" th:text="${highPriorityCount} + ' high priority'">0 high priority</span>
+  </div>
+
+  <div class="overflow-hidden rounded-[24px] border border-black/6 bg-white shadow-[0_16px_34px_rgba(57,65,58,0.05)]">
+    <div th:if="${#lists.isEmpty(todos)}" class="px-5 py-10 text-center text-sm text-[#6f8397]">
+      No tasks yet.
+    </div>
+
+    <article
+        th:each="todo : ${todos}"
+        class="app-todo-row flex items-start gap-3 border-t border-black/6 px-4 py-4 first:border-t-0 sm:px-5"
+    >
+      <button
+          type="button"
+          th:hx-post="@{'/todo/items/' + ${todo.id} + '/toggle'}"
+          hx-target="#todo-board"
+          hx-swap="outerHTML settle:220ms"
+          class="app-todo-toggle mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition"
+          th:classappend="${todo.done} ? ' is-done border-[#ff2442] bg-[#ff2442] text-white' : ' border-[#b7c2cb] bg-white text-transparent hover:border-[#ff2442]'">
+        <svg viewBox="0 0 20 20" class="app-todo-check h-3.5 w-3.5 fill-current">
+          <path d="M7.6 13.2 4.7 10.3l-1.1 1.1 4 4 8-8-1.1-1.1z"/>
+        </svg>
+      </button>
+
+      <div class="min-w-0 flex-1">
+        <div class="flex items-center gap-2">
+          <h3
+              class="text-[15px] font-medium text-[#2e342f]"
+              th:classappend="${todo.done} ? ' line-through text-[#90a0ad]' : ''"
+              th:text="${todo.title}">
+            Task title
+          </h3>
+          <span
+              th:text="${todo.priority}"
+              th:classappend="${todo.priority == 'High'} ? ' bg-[#fff0f1] text-[#ff2442]' : (${todo.priority == 'Low'} ? ' bg-[#f4f4f5] text-[#666]' : ' bg-[#fff5e8] text-[#c97710]')"
+              class="rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em]">
+            Medium
+          </span>
+        </div>
+        <p
+            th:if="${todo.description != null and !#strings.isEmpty(todo.description)}"
+            class="mt-1 text-sm text-[#6f8397]"
+            th:classappend="${todo.done} ? ' text-[#a8b3bc]' : ''"
+            th:text="${todo.description}">
+          Details
+        </p>
+      </div>
+
+      <button
+          type="button"
+          th:hx-post="@{'/todo/items/' + ${todo.id} + '/delete'}"
+          hx-target="#todo-board"
+          hx-swap="outerHTML settle:220ms"
+          class="shrink-0 text-sm text-[#8b98a4] transition hover:text-[#ff2442]">
+        Delete
+      </button>
+    </article>
+  </div>
+</section>
+</body>
+</html>

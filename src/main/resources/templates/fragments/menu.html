@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<body class="min-h-screen bg-base-200">
+<ul class="menu flex h-full w-full flex-col py-3" th:fragment="menu">
+  <li th:replace="~{fragments/menu-item :: menuItem(
+        'dashboard.svg',
+        '/',
+        'Dashboard',
+        ${currentPath}
+      )}">
+  </li>
+  <li th:replace="~{fragments/menu-item :: menuItem(
+        'todo.svg',
+        '/todo',
+        'Todo',
+        ${currentPath}
+      )}">
+  </li>
+</ul>
+</body>
+</html>

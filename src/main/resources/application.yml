@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: springboot-thymeleaf-react
+  profiles:
+    active: dev
+  threads:
+    virtual:
+      enabled: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+server:
+  port: 8080
+  servlet:
+    context-path: /
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L %X{traceId} %kvp - %m%n"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+app:
+  jwt:
+    jwt-secret: kSmtkgOuOVYtb0aQupC4syY81I2yaXJrOVf9F6ve6mk=
+    access-token-expiration-minutes: 5
+    refresh-token-expiration-minutes: 10080
+    token-version: 1

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(title=~{::title}, content=~{::main})}">
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+<main>
+  <section class="app-panel">
+    <div class="app-panel-header">
+      <div>
+        <h1 class="app-title">Todo overview</h1>
+        <p class="app-muted">Only the current todo workload.</p>
+      </div>
+      <a th:href="@{/todo}" class="app-button app-button-secondary">Open todo</a>
+    </div>
+
+    <div class="app-stats">
+      <article class="app-stat">
+        <span class="app-stat-label">Total</span>
+        <strong th:text="${totalCount}">0</strong>
+      </article>
+      <article class="app-stat">
+        <span class="app-stat-label">Open</span>
+        <strong th:text="${openCount}">0</strong>
+      </article>
+      <article class="app-stat">
+        <span class="app-stat-label">Done</span>
+        <strong th:text="${doneCount}">0</strong>
+      </article>
+      <article class="app-stat">
+        <span class="app-stat-label">High</span>
+        <strong th:text="${highPriorityCount}">0</strong>
+      </article>
+    </div>
+
+    <div class="app-chart">
+      <div class="app-chart-row">
+        <span>Open</span>
+        <div class="app-chart-track">
+          <div class="app-chart-bar" th:style="'width:' + ${openRatio} + '%'"></div>
+        </div>
+        <strong th:text="${openCount}">0</strong>
+      </div>
+      <div class="app-chart-row">
+        <span>Done</span>
+        <div class="app-chart-track">
+          <div class="app-chart-bar" th:style="'width:' + ${doneRatio} + '%'"></div>
+        </div>
+        <strong th:text="${doneCount}">0</strong>
+      </div>
+      <div class="app-chart-row">
+        <span>High</span>
+        <div class="app-chart-track">
+          <div class="app-chart-bar" th:style="'width:' + ${highPriorityRatio} + '%'"></div>
+        </div>
+        <strong th:text="${highPriorityCount}">0</strong>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

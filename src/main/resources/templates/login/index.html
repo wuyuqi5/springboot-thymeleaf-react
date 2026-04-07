@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | App Template</title>
+  <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+  <vite:react-refresh></vite:react-refresh>
+  <vite:client></vite:client>
+  <vite:vite>
+    <vite:entry value="/css/application.css"></vite:entry>
+  </vite:vite>
+</head>
+<body class="app-auth-shell">
+<main class="app-auth-grid">
+  <section class="app-auth-hero" aria-label="Portal introduction">
+    <div class="app-pill">
+      <span class="app-pill-dot"></span>
+      App Template
+    </div>
+    <h1 class="app-hero-title">A starter template for dashboards and task flows.</h1>
+    <p class="app-hero-copy">
+      A starter template for building server-rendered pages, simple interactions, and admin-style screens.
+      Use it as a neutral base for internal tools and general application flows.
+    </p>
+    <div class="app-metric-grid">
+      <article class="app-metric-card">
+        <span class="app-metric-value">Pages</span>
+        <span class="app-metric-label">Reusable layouts and page shells for common application screens.</span>
+      </article>
+      <article class="app-metric-card">
+        <span class="app-metric-value">Forms</span>
+        <span class="app-metric-label">Ready for input flows, validation states, and modal interactions.</span>
+      </article>
+      <article class="app-metric-card">
+        <span class="app-metric-value">Components</span>
+        <span class="app-metric-label">A base set of panels, buttons, menus, and dialogs for extension.</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="app-glass-card" aria-label="Login form">
+    <div class="app-card-inner">
+      <div class="app-brand-row">
+        <div class="app-brand-mark">SB</div>
+        <div class="app-brand-text">
+          <strong>App Template</strong>
+          <span>Sign in to continue</span>
+        </div>
+      </div>
+
+      <h2 class="app-section-title">Login</h2>
+      <p class="app-section-copy">Sign in with your registered username and password.</p>
+
+      <div th:if="${message}" class="app-flash app-flash-success">
+        <span th:text="${message}"></span>
+      </div>
+
+      <div th:if="${error}" class="app-flash app-flash-error">
+        <span th:text="${error}"></span>
+      </div>
+
+      <div th:if="${tooManyAttempts}" class="app-flash app-flash-warn">
+        Password entry failed 6 or more times.
+        <a th:href="@{/login/password-reissue-application}" class="app-link">Reset your password</a>
+      </div>
+
+      <form id="loginForm" class="app-form-grid" method="post" th:action="@{/login}" novalidate>
+        <div class="app-field">
+          <label class="app-field-label" for="usernameInput">Username</label>
+          <input
+              id="usernameInput"
+              name="username"
+              type="text"
+              class="app-input"
+              autocomplete="username"
+              autofocus
+              th:value="${username}"
+              placeholder="user@example.com">
+          <span id="usernameError" class="app-input-error-text">Please enter your username.</span>
+        </div>
+
+        <div class="app-field">
+          <label class="app-field-label" for="passwordInput">Password</label>
+          <div class="app-password-wrap">
+            <input
+                id="passwordInput"
+                name="password"
+                type="password"
+                class="app-input"
+                autocomplete="current-password"
+                placeholder="••••••••">
+            <button id="togglePassword" class="app-password-toggle" type="button" aria-label="Toggle password visibility">
+              <svg id="eyeClosed" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"></path>
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+              <svg id="eyeOpen" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="hidden">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <span id="passwordError" class="app-input-error-text">Please enter your password.</span>
+        </div>
+
+        <div class="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <a th:href="@{/login/password-reissue-application}" class="app-link">Forgot your password?</a>
+          <button class="app-primary-btn" type="submit">Sign In</button>
+        </div>
+      </form>
+
+      <div class="app-footer-links">
+        <span>Don't have an account? <a th:href="@{/register}" class="app-link font-semibold">Create one</a></span>
+        <span>Need help? <a th:href="@{/login/password-reissue-application}" class="app-link font-semibold">Support</a></span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  if (window.location.search) {
+    history.replaceState(null, '', window.location.pathname);
+  }
+
+  var form = document.getElementById('loginForm');
+  var username = document.getElementById('usernameInput');
+  var password = document.getElementById('passwordInput');
+  var usernameError = document.getElementById('usernameError');
+  var passwordError = document.getElementById('passwordError');
+  var togglePassword = document.getElementById('togglePassword');
+  var eyeOpen = document.getElementById('eyeOpen');
+  var eyeClosed = document.getElementById('eyeClosed');
+
+  function setFieldState(input, errorEl, invalid) {
+    input.classList.toggle('app-input-error', invalid);
+    errorEl.classList.toggle('is-visible', invalid);
+  }
+
+  form.addEventListener('submit', function (event) {
+    var usernameEmpty = !username.value.trim();
+    var passwordEmpty = !password.value;
+
+    setFieldState(username, usernameError, usernameEmpty);
+    setFieldState(password, passwordError, passwordEmpty);
+
+    if (usernameEmpty || passwordEmpty) {
+      event.preventDefault();
+      return;
+    }
+
+    var submitButton = form.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+  });
+
+  username.addEventListener('input', function () {
+    if (username.value.trim()) {
+      setFieldState(username, usernameError, false);
+    }
+  });
+
+  password.addEventListener('input', function () {
+    if (password.value) {
+      setFieldState(password, passwordError, false);
+    }
+  });
+
+  togglePassword.addEventListener('click', function () {
+    var showing = password.type === 'text';
+    password.type = showing ? 'password' : 'text';
+    eyeOpen.classList.toggle('hidden', showing);
+    eyeClosed.classList.toggle('hidden', !showing);
+  });
+</script>
+</body>
+</html>

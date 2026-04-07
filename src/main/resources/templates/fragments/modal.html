@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="app-dialog-box">
+  <div class="app-dialog-inner">
+    <div class="flex items-start gap-4">
+      <div class="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,var(--color-accent),#5b1414)] text-white shadow-[0_14px_26px_rgba(0,0,0,0.22)]">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             class="h-6 w-6">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      </div>
+      <div class="min-w-0 flex-1">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--color-ink-soft)]">
+          System
+        </p>
+        <h3 class="mt-2 text-2xl font-semibold tracking-[-0.04em] text-[var(--color-ink-strong)]">
+          Something went wrong
+        </h3>
+        <p id="error-message" class="mt-3 text-sm leading-7 text-[var(--color-ink-soft)]"
+           th:text="${message}">
+          The error message will appear here
+        </p>
+      </div>
+    </div>
+    <div class="mt-8 flex flex-col-reverse gap-3 border-t border-black/8 pt-4 sm:flex-row sm:items-center sm:justify-between">
+      <div class="text-[10px] font-mono uppercase tracking-[0.18em] text-[var(--color-ink-soft)]/80">
+        Code: <span id="error-code" th:text="${code}">E000</span>
+      </div>
+      <button class="app-primary-btn min-w-32"
+              @click="open = false">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

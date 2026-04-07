@@ -1,0 +1,34 @@
+{
+  "name": "portal",
+  "type": "module",
+  "devDependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "@wim.deblauwe/vite-plugin-spring-boot": "^1.1.0",
+    "daisyui": "^5.5.1-beta.2",
+    "husky": "^9.1.7",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  },
+  "scripts": {
+    "dev": "vite",
+    "dev-open": "vite --open http://localhost:8080",
+    "build": "vite build",
+    "prepare": "husky"
+  },
+  "private": true,
+  "dependencies": {
+    "apexcharts": "^5.3.6",
+    "clsx": "^2.1.1",
+    "jotai": "^2.17.1",
+    "moment": "^2.30.1",
+    "react": "^19.2.3",
+    "react-apexcharts": "^1.9.0",
+    "react-dom": "^19.2.3",
+    "react-icons": "^5.5.0"
+  }
+}

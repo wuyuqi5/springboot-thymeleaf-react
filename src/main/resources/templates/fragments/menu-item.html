@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<li th:fragment="menuItem(icon, path, title, currentPath)"
+    class="mx-2">
+
+  <a th:href="@{${path}}"
+     class="block rounded-[22px] p-1.5 text-[#6B7280] transition-colors"
+     th:with="active=${
+      path == '/'
+        ? currentPath == '/'
+        : #strings.startsWith(currentPath, path)
+   }"
+     th:classappend="
+      ${active}
+        ? ' !text-[#ff2442] font-semibold bg-[#fff1f3] shadow-[0_10px_24px_rgba(255,36,66,0.10)]'
+        : ' hover:bg-[#fafafa] hover:!text-[#111111]'
+   ">
+    <div class="flex min-h-[48px] items-center pl-2.5">
+      <span class="flex items-center justify-center w-6 h-6 shrink-0">
+        <img th:src="@{'/images/menu/' + ${icon}}"
+             class="w-5 h-5 object-contain"
+             th:classappend="${active} ? 'icon-filter-main' : 'icon-filter-muted'"
+             alt="" />
+      </span>
+      <span class="ml-3 flex-1 truncate text-sm" th:text="${title}"></span>
+    </div>
+  </a>
+
+</li>
+
+</body>
+</html>

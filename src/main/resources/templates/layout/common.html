@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout(title, content)"
+      th:with="scripts=${scripts?:null}">
+<head>
+  <th:block th:replace="${title}"></th:block>
+  <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="_ctx" th:content="@{/}"/>
+
+  <vite:react-refresh></vite:react-refresh>
+  <vite:client></vite:client>
+  <vite:vite>
+    <vite:entry value="/css/application.css"></vite:entry>
+  </vite:vite>
+</head>
+
+<body class="app-shell">
+<div class="app-layer">
+<header class="app-topbar">
+  <div class="flex-1 px-8">
+    <span class="app-brand">
+      App Template
+    </span>
+  </div>
+</header>
+
+<main class="app-page-wrap justify-center">
+  <div id="content" class="app-content-panel mt-2 w-full max-w-2xl p-6">
+    <th:block th:replace="${content}"></th:block>
+  </div>
+</main>
+
+<script th:src="@{/webjars/alpinejs/dist/cdn.min.js}"></script>
+<script th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+
+<th:block th:if="${scripts != null}">
+  <th:block th:replace="${scripts}"></th:block>
+</th:block>
+
+</div>
+</body>
+</html>

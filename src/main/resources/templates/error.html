@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/common :: layout(title=~{::title}, content=~{::main})}">
+<head>
+  <title>Error | App Template</title>
+</head>
+<body>
+<main>
+  <div class="mx-auto flex min-h-[60vh] max-w-2xl items-center justify-center">
+    <div class="app-glass-card w-full max-w-xl">
+      <div class="app-card-inner space-y-5 text-center">
+        <div class="app-brand-row justify-center">
+          <div class="app-brand-mark">!</div>
+          <div class="app-brand-text text-left">
+            <strong>Application Error</strong>
+            <span>Template error view</span>
+          </div>
+        </div>
+        <h2 class="app-section-title">
+          Something went wrong
+        </h2>
+        <p class="app-section-copy">
+          A problem occurred while processing your request. Review the error details, then return to the home page.
+        </p>
+        <div class="rounded-[20px] border border-[rgba(15,34,61,0.08)] bg-[#f8fbfd] px-4 py-4 text-sm text-[#5f7286]">
+          Error Code:
+          <span class="font-mono font-medium"
+                th:text="${code}">
+            UNKNOWN
+          </span>
+        </div>
+        <div class="app-flash app-flash-error text-left">
+          <span th:text="${message}">
+            The error message will appear here
+          </span>
+        </div>
+        <div class="pt-2">
+          <a th:href="@{/}"
+             class="app-primary-btn w-full">
+            Back to home
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
